@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import "../styles/project-details.css";
 import { projects } from "../data/mockData";
 import Timeline from "../components/Timeline";
 import TaskDrawer from "../components/TaskDrawer";
 import StatusBadge from "../components/StatusBadge";
 import type { Task } from "../types";
+
 
 export default function ProjectDetails() {
   const { projectId } = useParams();
@@ -13,7 +15,7 @@ export default function ProjectDetails() {
   const [task, setTask] = useState<Task | null>(null);
   const tabs = ["Overview", "Timeline", "Tasks", "Calendar", "Files", "Activity"];
   return (
-    <>
+    <div className="project-detail">
       <div className="project-header">
         <div><Link to="/projects" className="back">← Projects</Link><div className="title-line"><h1>{project.name}</h1><StatusBadge status={project.status} /></div><p>{project.description}</p></div>
         <div className="header-actions"><button className="secondary">•••</button><button className="primary">+ Add</button></div>
@@ -25,14 +27,14 @@ export default function ProjectDetails() {
         <div><label>Timeline</label><b>{project.startDate} → {project.endDate}</b></div>
       </div>
       <div className="tabs">{tabs.map(t => <button key={t} className={tab === t ? "tab active" : "tab"} onClick={() => setTab(t)}>{t}</button>)}</div>
-      {tab === "Timeline" && <><div className="timeline-toolbar"><div><button className="secondary">Gantt ▾</button><button className="secondary">Filter ▾</button></div><div><button className="secondary">Today</button><button className="secondary">Zoom −</button><button className="secondary">Zoom +</button></div></div><Timeline project={project} onTaskClick={setTask} /></>}
+      {tab === "Timeline" && <Timeline project={project} onTaskClick={setTask} />}
       {tab === "Overview" && <Overview project={project} />}
       {tab === "Tasks" && <TaskList project={project} onTaskClick={setTask} />}
       {tab === "Calendar" && <div className="empty-panel"><h2>Project Calendar</h2><p>Calendar view will use the same tasks and milestones as the timeline.</p></div>}
       {tab === "Files" && <div className="empty-panel"><h2>Project Files</h2><p>Files attached to tasks and project-level documents will appear here.</p></div>}
       {tab === "Activity" && <div className="activity-list"><div><span className="avatar small">R</span><p><b>Rahul</b> changed Hardware development to 64%<small>Today, 09:40</small></p></div><div><span className="avatar small">P</span><p><b>Priya</b> commented on Hardware development<small>Yesterday, 16:20</small></p></div></div>}
       {task && <TaskDrawer task={task} onClose={() => setTask(null)} />}
-    </>
+    </div>
   );
 }
 

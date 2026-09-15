@@ -1,0 +1,695 @@
+/* =========================================================
+   TIMELINE / GANTT
+========================================================= */
+
+.timeline-card {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #e4e9f0;
+  border-radius: 12px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   TIMELINE TOOLBAR
+========================================================= */
+
+.timeline-toolbar {
+  min-height: 56px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 10px 16px;
+
+  background: #ffffff;
+  border-bottom: 1px solid #e4e9f0;
+
+  box-sizing: border-box;
+}
+
+.timeline-toolbar > div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+
+/* =========================================================
+   TIMELINE SCROLL CONTAINER
+========================================================= */
+
+.timeline-scroll {
+  width: 100%;
+  max-height: 650px;
+
+  overflow-x: auto;
+  overflow-y: auto;
+
+  scrollbar-width: thin;
+  scrollbar-color: #aeb8c5 #f4f6f8;
+}
+
+.timeline-scroll::-webkit-scrollbar {
+  width: 8px;
+  height: 9px;
+}
+
+.timeline-scroll::-webkit-scrollbar-track {
+  background: #f4f6f8;
+}
+
+.timeline-scroll::-webkit-scrollbar-thumb {
+  background: #b7c0cc;
+  border-radius: 8px;
+}
+
+.timeline-scroll::-webkit-scrollbar-thumb:hover {
+  background: #98a4b3;
+}
+
+
+/* =========================================================
+   TIMELINE CONTENT
+========================================================= */
+
+.timeline-content {
+  position: relative;
+
+  /*
+   * The left column is 280px.
+   * The calendar width is dynamically supplied
+   * by Timeline.tsx.
+   */
+  min-width: max-content;
+
+  background: #ffffff;
+}
+
+
+/* =========================================================
+   TIMELINE HEADER
+========================================================= */
+
+.timeline-head {
+  position: sticky;
+  top: 0;
+
+  z-index: 30;
+
+  display: flex;
+
+  height: 76px;
+
+  background: #ffffff;
+
+  border-bottom: 1px solid #e4e9f0;
+}
+
+
+/* =========================================================
+   LEFT HEADER / TASK LABEL
+========================================================= */
+
+.timeline-label {
+  position: sticky;
+  left: 0;
+
+  z-index: 40;
+
+  width: 280px;
+  min-width: 280px;
+  height: 76px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 0 18px;
+
+  box-sizing: border-box;
+
+  background: #f8fafc;
+
+  border-right: 1px solid #e4e9f0;
+
+  color: #64748b;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+
+/* =========================================================
+   CALENDAR HEADER
+========================================================= */
+
+.timeline-calendar {
+  flex-shrink: 0;
+
+  height: 76px;
+
+  background: #ffffff;
+}
+
+
+/* =========================================================
+   MONTH ROW
+========================================================= */
+
+.timeline-months {
+  height: 36px;
+
+  display: flex;
+
+  background: #f8fafc;
+
+  border-bottom: 1px solid #e4e9f0;
+}
+
+.timeline-months > div {
+  height: 36px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+
+  border-right: 1px solid #e8edf2;
+
+  color: #64748b;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  text-transform: uppercase;
+}
+
+.timeline-months > div:last-child {
+  border-right: none;
+}
+
+
+/* =========================================================
+   CALENDAR CELLS
+========================================================= */
+
+.timeline-cells {
+  height: 40px;
+
+  display: flex;
+
+  background: #ffffff;
+}
+
+.timeline-cell {
+  height: 40px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+
+  border-right: 1px solid #edf0f4;
+
+  color: #7b8797;
+
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.timeline-cell:last-child {
+  border-right: none;
+}
+
+
+/* =========================================================
+   TIMELINE BODY
+========================================================= */
+
+.timeline-body {
+  width: max-content;
+  min-width: 100%;
+
+  background: #ffffff;
+}
+
+
+/* =========================================================
+   SCHEDULE GROUP
+========================================================= */
+
+.schedule-group {
+  width: max-content;
+  min-width: 100%;
+
+  border-bottom: 1px solid #e4e9f0;
+}
+
+.schedule-group:last-child {
+  border-bottom: none;
+}
+
+
+/* =========================================================
+   SCHEDULE HEADER
+========================================================= */
+
+.schedule-title {
+  position: sticky;
+  left: 0;
+
+  z-index: 60;
+
+  width: 280px;
+  min-width: 280px;
+  min-height: 42px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  padding: 0 18px;
+
+  box-sizing: border-box;
+
+  background: #f8fafc;
+
+  border-right: 1px solid #e4e9f0;
+  border-bottom: 1px solid #edf0f4;
+
+  color: #334155;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+}
+
+.schedule-title small {
+  margin-left: 4px;
+
+  color: #94a3b8;
+
+  font-size: 10px;
+  font-weight: 400;
+}
+
+
+/* =========================================================
+   SCHEDULE DOT
+========================================================= */
+
+.schedule-dot {
+  width: 8px;
+  height: 8px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+}
+
+.dot-vendor {
+  background: #64748b;
+}
+
+.dot-customer {
+  background: #2563eb;
+}
+
+.dot-internal {
+  background: #7c3aed;
+}
+
+
+/* =========================================================
+   TIMELINE ROW
+========================================================= */
+
+.timeline-row {
+  display: flex;
+
+  width: max-content;
+  min-width: 100%;
+
+  min-height: 48px;
+
+  background: #ffffff;
+
+  border-bottom: 1px solid #edf0f4;
+
+  box-sizing: border-box;
+}
+
+.timeline-row:last-child {
+  border-bottom: none;
+}
+
+
+/* =========================================================
+   TASK NAME
+========================================================= */
+
+.task-name {
+  position: sticky;
+  left: 0;
+
+  z-index: 50;
+
+  width: 280px;
+  min-width: 280px;
+  min-height: 48px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  padding: 0 18px;
+
+  box-sizing: border-box;
+
+  background: #ffffff;
+
+  border-right: 1px solid #edf0f4;
+
+  color: #334155;
+
+  font-size: 12px;
+
+  cursor: pointer;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.task-name:hover {
+  background: #f8fafc;
+
+  color: #172033;
+}
+
+
+/* =========================================================
+   TASK CHEVRON
+========================================================= */
+
+.task-chevron {
+  width: 14px;
+
+  flex-shrink: 0;
+
+  color: #94a3b8;
+
+  font-size: 16px;
+
+  transition:
+    transform 0.15s ease,
+    color 0.15s ease;
+}
+
+.task-name:hover .task-chevron {
+  transform: translateX(2px);
+
+  color: #475569;
+}
+
+
+/* =========================================================
+   TASK PERSON
+========================================================= */
+
+.task-person {
+  margin-left: auto;
+
+  width: 25px;
+  height: 25px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: #eef2f6;
+
+  color: #475569;
+
+  font-size: 9px;
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   GANTT TRACK
+========================================================= */
+
+.track {
+  position: relative;
+
+  flex-shrink: 0;
+
+  height: 48px;
+  min-height: 48px;
+
+  background: #ffffff;
+
+  overflow: visible;
+}
+
+
+/* =========================================================
+   TIMELINE GRID
+========================================================= */
+
+.track-grid {
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background-image:
+    linear-gradient(
+      to right,
+      #edf0f4 1px,
+      transparent 1px
+    );
+}
+
+
+/* =========================================================
+   TASK BAR
+========================================================= */
+
+.task-bar {
+  position: absolute;
+
+  top: 50%;
+
+  height: 24px;
+
+  min-width: 45px;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  padding: 0 8px;
+
+  box-sizing: border-box;
+
+  transform: translateY(-50%);
+
+  border-radius: 5px;
+
+  color: #ffffff;
+
+  font-size: 10px;
+  font-weight: 700;
+
+  white-space: nowrap;
+
+  cursor: pointer;
+
+  z-index: 10;
+
+  transition:
+    filter 0.15s ease,
+    transform 0.15s ease;
+}
+
+
+/* =========================================================
+   TASK BAR HOVER
+========================================================= */
+
+.task-bar:hover {
+  filter: brightness(0.94);
+
+  transform:
+    translateY(-50%)
+    scaleY(1.08);
+}
+
+
+/* =========================================================
+   TASK STATUS COLORS
+========================================================= */
+
+.bar-todo {
+  background: #94a3b8;
+}
+
+.bar-in_progress {
+  background: #3b82f6;
+}
+
+.bar-completed {
+  background: #22a06b;
+}
+
+.bar-blocked {
+  background: #ef8b2c;
+}
+
+.bar-cancelled {
+  background: #a43a45;
+}
+
+
+/* =========================================================
+   MILESTONE ROW
+========================================================= */
+
+.milestone-row .task-name {
+  color: #475569;
+
+  font-weight: 600;
+
+  cursor: default;
+}
+
+
+/* =========================================================
+   MILESTONE
+========================================================= */
+
+.milestone {
+  position: absolute;
+
+  top: 50%;
+
+  z-index: 5;
+
+  transform:
+    translate(-50%, -50%);
+
+  color: #c0841a;
+
+  font-size: 15px;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.15s ease,
+    color 0.15s ease;
+}
+
+.milestone:hover {
+  color: #a16207;
+
+  transform:
+    translate(-50%, -50%)
+    scale(1.2);
+}
+
+
+/* =========================================================
+   DIAMOND
+========================================================= */
+
+.diamond {
+  color: #c0841a;
+
+  font-size: 11px;
+
+  flex-shrink: 0;
+}
+
+
+/* =========================================================
+   ROW HOVER
+========================================================= */
+
+.timeline-row:hover {
+  background: #fcfdff;
+}
+
+.timeline-row:hover .track {
+  background-color: #fcfdff;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1000px) {
+
+  .timeline-label,
+  .task-name {
+    width: 230px;
+    min-width: 230px;
+
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .timeline-scroll {
+    max-height: 600px;
+  }
+
+}
+
+
+@media (max-width: 700px) {
+
+  .timeline-label,
+  .task-name {
+    width: 200px;
+    min-width: 200px;
+
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .timeline-toolbar {
+    flex-wrap: wrap;
+
+    gap: 8px;
+  }
+
+  .schedule-title {
+    padding-left: 12px;
+  }
+
+}

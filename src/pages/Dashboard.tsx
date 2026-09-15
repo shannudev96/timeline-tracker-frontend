@@ -82,7 +82,7 @@ export default function Dashboard() {
       </section>
 
       {/* Pagination */}
-      <div className="pagination-container">
+      {/* <div className="pagination-container">
         <span className="project-count">
           Showing 1–{projects.length} of 40 Projects
         </span>
@@ -99,7 +99,7 @@ export default function Dashboard() {
 
           <button aria-label="Next page">›</button>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

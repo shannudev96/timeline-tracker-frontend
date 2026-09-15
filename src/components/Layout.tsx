@@ -1,16 +1,39 @@
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 
 const nav = [
-  ["◈", "Dashboard", "/dashboard"],
-  ["▣", "Projects", "/projects"],
-  ["✓", "My Tasks", "/tasks"],
-  ["▦", "Calendar", "/calendar"],
+  {
+    icon: "◈",
+    label: "Dashboard",
+    path: "/dashboard",
+    tagline: "Manage and monitor all active projects",
+  },
+  {
+    icon: "▣",
+    label: "Projects",
+    path: "/projects",
+    tagline: "Manage every project and its delivery timelines",
+  },
+  {
+    icon: "✓",
+    label: "My Tasks",
+    path: "/tasks",
+    tagline: "Track and manage your assigned tasks",
+  },
+  {
+    icon: "▦",
+    label: "Calendar",
+    path: "/calendar",
+    tagline: "View and manage your project schedules",
+  },
 ];
 
 export default function Layout() {
   const location = useLocation();
 
-  const isDashboard = location.pathname === "/dashboard";
+  const currentSection =
+    nav.find(({ path }) =>
+      location.pathname.startsWith(path)
+    ) ?? nav[0];
 
   return (
     <div className="app-shell">
@@ -33,14 +56,11 @@ export default function Layout() {
         </div>
 
         {/* Navigation */}
-        <nav
-          className="nav"
-          aria-label="Main navigation"
-        >
-          {nav.map(([icon, label, to]) => (
+        <nav className="nav" aria-label="Main navigation">
+          {nav.map(({ icon, label, path }) => (
             <NavLink
-              key={to}
-              to={to}
+              key={path}
+              to={path}
               title={label}
               className={({ isActive }) =>
                 `nav-item ${isActive ? "active" : ""}`
@@ -60,7 +80,6 @@ export default function Layout() {
         {/* Sidebar Bottom */}
         <div className="sidebar-bottom">
           <div className="user-mini">
-
             <span className="avatar">
               S
             </span>
@@ -69,9 +88,9 @@ export default function Layout() {
               <b>Shannu</b>
               <small>Project Manager</small>
             </div>
-
           </div>
         </div>
+
       </aside>
 
       {/* ==================== MAIN ==================== */}
@@ -80,19 +99,10 @@ export default function Layout() {
         {/* ==================== TOPBAR ==================== */}
         <header className="topbar">
 
-          {/* Title */}
+          {/* Title + Tagline */}
           <div className="topbar-title">
-            <h1>
-              {isDashboard
-                ? "Projects"
-                : "Timeline Tracker"}
-            </h1>
-
-            <p>
-              {isDashboard
-                ? "Manage and monitor all active projects"
-                : "Project management workspace"}
-            </p>
+            <h1>{currentSection.label}</h1>
+            <p>{currentSection.tagline}</p>
           </div>
 
           {/* Actions */}
@@ -149,7 +159,7 @@ export default function Layout() {
           </div>
         </header>
 
-        {/* ==================== PAGE CONTENT ==================== */}
+        {/* Page Content */}
         <div className="content">
           <Outlet />
         </div>

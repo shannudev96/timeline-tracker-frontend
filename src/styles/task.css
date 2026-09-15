@@ -1,0 +1,330 @@
+/* =========================================================
+   TASKS PAGE
+========================================================= */
+
+.project {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   TOOLBAR
+========================================================= */
+
+.project .toolbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding: 0;
+}
+
+.project .toolbar .secondary {
+  height: 40px;
+  padding: 0 16px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid #d8e0eb;
+  border-radius: 9px;
+
+  background: #ffffff;
+  color: #24324a;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.project .toolbar .secondary:hover {
+  background: #f5f8fc;
+  border-color: #b9c7d9;
+  box-shadow: 0 2px 6px rgba(25, 45, 75, 0.08);
+}
+
+
+/* =========================================================
+   TASK BOARD
+========================================================= */
+
+.task-board {
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: repeat(4, minmax(240px, 1fr));
+  gap: 16px;
+
+  align-items: start;
+}
+
+
+/* =========================================================
+   TASK COLUMN
+========================================================= */
+
+.task-column {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  background: #edf2f7;
+
+  border: 1px solid #dce4ee;
+  border-radius: 12px;
+
+  padding: 12px;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   COLUMN HEADER
+========================================================= */
+
+.column-head {
+  min-height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 4px 10px;
+
+  border-bottom: 1px solid #d9e1eb;
+}
+
+.column-head > b {
+  min-width: 26px;
+  height: 26px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #ffffff;
+  color: #536174;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  border: 1px solid #dce3ec;
+}
+
+
+/* =========================================================
+   STATUS BADGES
+========================================================= */
+
+.column-head .status {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 5px 10px;
+
+  border-radius: 999px;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   TASK CARDS
+========================================================= */
+
+.mini-task {
+  width: 100%;
+  margin-top: 10px;
+  padding: 14px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+
+  text-align: left;
+
+  background: #ffffff;
+
+  border: 1px solid #dce3ec;
+  border-radius: 10px;
+
+  color: #16243a;
+
+  cursor: pointer;
+
+  box-sizing: border-box;
+
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    border-color 0.18s ease;
+}
+
+.mini-task:hover {
+  transform: translateY(-2px);
+
+  border-color: #b9cce2;
+
+  box-shadow:
+    0 5px 14px rgba(31, 55, 88, 0.10);
+}
+
+
+/* =========================================================
+   TASK TITLE
+========================================================= */
+
+.mini-task > b {
+  display: block;
+
+  color: #17243a;
+
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+
+/* =========================================================
+   PROJECT NAME
+========================================================= */
+
+.mini-task > small {
+  display: block;
+
+  color: #718096;
+
+  font-size: 12px;
+  line-height: 1.35;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+/* =========================================================
+   TASK META
+========================================================= */
+
+.mini-task > div {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-top: 3px;
+
+  color: #6b7789;
+
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   PRIORITY
+========================================================= */
+
+.mini-task .priority {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 4px 8px;
+
+  border-radius: 999px;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  text-transform: capitalize;
+}
+
+.priority-high {
+  background: #fdecec;
+  color: #d64545;
+}
+
+.priority-medium {
+  background: #fff4d8;
+  color: #b7791f;
+}
+
+.priority-low {
+  background: #e7f7f2;
+  color: #159570;
+}
+
+
+/* =========================================================
+   TASK DATE
+========================================================= */
+
+.mini-task > div > span:last-child {
+  color: #697586;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   STATUS-SPECIFIC COLUMN ACCENTS
+========================================================= */
+
+.task-column:nth-child(1) {
+  border-top: 3px solid #94a3b8;
+}
+
+.task-column:nth-child(2) {
+  border-top: 3px solid #4b83bd;
+}
+
+.task-column:nth-child(3) {
+  border-top: 3px solid #d97777;
+}
+
+.task-column:nth-child(4) {
+  border-top: 3px solid #4caf8b;
+}
+
+
+/* =========================================================
+   EMPTY COLUMN
+========================================================= */
+
+.task-column:has(.mini-task:only-of-type) {
+  min-height: 160px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1100px) {
+  .task-board {
+    grid-template-columns: repeat(2, minmax(260px, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .project .toolbar {
+    flex-wrap: wrap;
+  }
+
+  .task-board {
+    grid-template-columns: 1fr;
+  }
+}
